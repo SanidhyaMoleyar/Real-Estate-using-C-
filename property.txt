@@ -1,0 +1,913 @@
+/*Header files used*/
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<ctype.h>
+#include<iomanip>
+#include<string.h>
+#include<math.h>
+#include<process.h>
+#include<fstream>
+
+using namespace std;
+//Global variables
+float price_persqfeet;
+long double area1;
+long double budget;
+char option;
+long double amount;
+class property
+{
+public:
+int rec_no;
+long double area,area8;
+long double rate,amount1;
+property()
+{
+area=0.0;
+rate=0.0;
+amount1=0.0;
+}
+int Get_Rec_No()
+{
+return rec_no;
+}
+void Get_Info()
+{
+cout<<endl<<"Enter the transaction no : ";
+cin>>rec_no;
+cout<<endl<<"Enter the area (in sq. feet) of the property you want to buy : ";
+cin>>area8;
+area=area8;
+cout<<"Area "<<area;
+rate=price_persqfeet;
+cout<<"rate : "<<rate;
+}
+void Calculate_Price()
+{
+long double price=area*rate;
+cout<<endl<<"Price : " <<price;
+amount1=price;
+}
+void Put_Info()
+{
+cout<<endl<<"Transaction Number : "<<rec_no;
+cout<<endl<<"Area : "<<area;
+cout<<endl<<"Price per sq. feet : "<<rate;
+cout<<endl<<"Amount : "<<amount1;
+}
+void Modify()
+{
+cout<<endl<<"Enter new details : \n";
+long double new_area,new_price;
+cout<<endl<<"Enter the new area : (Press 0 to retain old one) ";
+cin>>new_area;
+if(new_area!=0)
+{
+area=new_area;
+rate=price_persqfeet;
+Calculate_Price();
+new_price=amount1;
+}
+cout<<endl<<"Area : "<<area;
+cout<<endl<<"Amount : "<<new_price;
+}
+};
+property P1,prop;
+//Class declaration for land details
+class land
+{
+private:
+char first_name[25];
+char last_name[25];
+char email_add[20];
+int contact_no;
+char location[25];
+public:
+void Read_Details();
+void Land_Menu();
+void Enter_Choice_Display();
+};
+//Input details
+void land::Read_Details()
+{
+cout<<"Enter your first name : ";
+gets(first_name);
+cout<<"Enter your last name : ";
+gets(last_name);
+cout<<"Enter your contact number : ";
+cin>>contact_no;
+cout<<"\nEnter your email address : ";
+gets(email_add);
+cout<<"\nEnter your budget : ";
+cin>>budget;
+cout<<"\nEnter the area where you live : ";
+gets(location);
+}
+//Fuction to display menu regarding the land
+void land::Land_Menu()
+{
+cout<<endl<<"****************Land Menu******************";
+cout<<endl<<"1. Agricultural Land ";
+cout<<endl<<"2. Non-Agricultural Land ";
+}
+//Function to display the land details
+void land::Enter_Choice_Display()
+{
+Land_Menu();
+int type_land;
+char location_land;
+cout<<endl<<"Enter the type of land you want to buy : ";
+cin>>type_land;
+switch(type_land)
+{
+case 1:
+cout<<endl<<"AGRICULTURAL LANDS";
+cout<<endl<<"The agricultural lands are available in the following areas : ";
+cout<<endl<<"A. PANVEL ";
+cout<<endl<<"B. KARJAT ";
+cout<<endl<<"C. PUNE ";
+cout<<endl<<"Enter the location of land you want : ";
+cin>>location_land;
+switch(location_land)
+{
+case 'A':
+cout<<endl<<"AGRICULTURAL LANDS IN PANVEL";
+if(P1.area<10)
+price_persqfeet=300;
+else if(P1.area>=10&&P1.area<50)
+price_persqfeet=400;
+else if(P1.area>=50&&P1.area<=100)
+price_persqfeet=450;
+else
+price_persqfeet=550;
+cout<<endl<<"Price per sq. feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"AGRICULTURAL LANDS IN KARJAT";
+if(P1.area<50)
+price_persqfeet=184;
+else
+price_persqfeet=300;
+cout<<endl<<"Price per sq. feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"AGRICULTURAL LANDS IN PUNE";
+if(P1.area<50)
+price_persqfeet=400;
+else
+price_persqfeet=600;
+cout<<endl<<"Price per sq. feet : "<<price_persqfeet;
+break;
+}
+break;
+case 2:
+cout<<endl<<"RESIDENTIAL PLOTS";
+cout<<endl<<"The plots are available in the following areas : ";
+cout<<endl<<"A. Bandra(West) \n";
+cout<<endl<<"B. Colaba  \n";
+cout<<endl<<"C. Andheri(West) \n";
+cout<<endl<<"Enter the location of the plot you want : ";
+cin>>location_land;
+switch(location_land)
+{
+case 'A':
+cout<<endl<<"PLOTS IN BANDRA(WEST)";
+if(P1.area<110)
+price_persqfeet=1000;
+else
+price_persqfeet=1500;
+cout<<endl<<"Price per sq. feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"PLOTS IN COLABA";
+if(P1.area<50)
+price_persqfeet=400;
+else
+price_persqfeet=750;
+cout<<endl<<"Price per sq. feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"PLOTS IN ANDHERI(WEST)";
+if(P1.area<15)
+price_persqfeet=250;
+else
+price_persqfeet=400;
+cout<<endl<<"Price per sq. feet : "<<price_persqfeet;
+break;
+}
+break;
+}
+}
+//Class declaration for bungalow
+class bungalow
+{
+private:
+char first_name[25];
+char last_name[25];
+int contact_no;
+char email_add[25];
+float budget;
+char location[25];
+public:
+void Get_Details();
+void Room_Menu();
+void BHK();
+};
+
+//Function to enter details regarding bungalows
+void bungalow::Get_Details()
+{
+cout<<"Enter your first name : ";
+gets(first_name);
+cout<<"Enter your last name : ";
+gets(last_name);
+cout<<"Enter your contact number : ";
+cin>>contact_no;
+cout<<"Enter your email address : ";
+gets(email_add);
+cout<<"Enter your budget : ";
+cin>>budget;
+cout<<"Enter the area where you live : ";
+gets(location);
+}
+
+//Function to enter the number of rooms
+void bungalow::Room_Menu()
+{
+cout<<endl<<"***************ROOM MENU******************";
+cout<<endl<<"1. 4 BHK";
+cout<<endl<<"2. 5 BHK";
+cout<<endl<<"3. 6 BHK";
+}
+//Function to display the details regarding the bungalows
+void bungalow::BHK()
+{
+Room_Menu();
+int rooms;
+char location_bungalow;
+cout<<"Enter the number of rooms you want : ";
+cin>>rooms;
+switch(rooms)
+{
+case 1:
+cout<<endl<<"You have chosen 4 BHK";
+cout<<endl<<"4 BHK bungalows are available in : ";
+cout<<endl<<"A. MAHABALESHWAR";
+cout<<endl<<"B. LONAVALA";
+cout<<endl<<"C. JUHU";
+cout<<"Enter the location of the bungalow you want : ";
+cin>>location_bungalow;
+switch(location_bungalow)
+{
+case 'A':
+cout<<endl<<"BUNGALOW IN MAHABALESHWAR";
+price_persqfeet=250;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"BUNGALOW IN LONAVALA";
+price_persqfeet=200;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"BUNGALOW IN JUHU";
+price_persqfeet=590;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+case 2:
+cout<<endl<<"You have chosen 5 BHK";
+cout<<endl<<"5 BHK bungalows are available in : ";
+cout<<endl<<"A. MAHABALESHWAR";
+cout<<endl<<"B. LONAVALA";
+cout<<endl<<"C. JUHU";
+cout<<endl<<"Enter the location of the bungalow : ";
+cin>>location_bungalow;
+switch(location_bungalow)
+{
+case 'A':
+cout<<endl<<"BUNGALOW IN MAHABALESHWAR";
+price_persqfeet=400;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"BUNGALOW IN LONAVALA";
+price_persqfeet=160;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"BUNGALOW IN JUHU";
+price_persqfeet=690;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+case 3:
+cout<<endl<<"You have chosen 6 BHK";
+cout<<endl<<"6 BHK bungalows are available in : ";
+cout<<endl<<"A. MAHABALESHWAR";
+cout<<endl<<"B. LONAVALA";
+cout<<endl<<"C. JUHU";
+cout<<endl<<"Enter the location of the bungalow : ";
+cin>>location_bungalow;
+switch(location_bungalow)
+{
+case 'A':
+cout<<endl<<"BUNGALOW IN MAHABALESHWAR";
+price_persqfeet=500;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"BUNGALOW IN LONAVALA";
+price_persqfeet=300;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"BUNGALOW IN JUHU";
+price_persqfeet=400;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+}
+}
+
+//Class declaration for apartments
+class apartments
+{
+private:
+char type;
+char first_name[25];
+char last_name[25];
+int contact_no;
+char email_add[25];
+float budget;
+public:
+void Enter_Details();
+void Apartment_Menu();
+void Enter_Choice_Display();
+};
+
+//Function to enter details regarding apartments
+void apartments::Enter_Details()
+{
+cout<<endl<<"Enter your first name : ";
+gets(first_name);
+cout<<"Enter your last name : ";
+gets(last_name);
+cout<<"Enter your contact number : ";
+cin>>contact_no;
+cout<<"Enter your email address : ";
+gets(email_add);
+cout<<"Enter your budget : ";
+cin>>budget;
+}
+
+//Function to display menu about the apartments
+void apartments::Apartment_Menu()
+{
+cout<<endl<<"**************APARTMENT MENU**************";
+cout<<endl<<"1. 1 BHK";
+cout<<endl<<"2. 2 BHK";
+cout<<endl<<"3. 3 BHK";
+}
+
+//Function to display details about apartments
+void apartments::Enter_Choice_Display()
+{
+Apartment_Menu();
+int type;
+char location_apt;
+cout<<endl<<"Enter the type of the apartment you want : ";
+cin>>type;
+switch(type)
+{
+case 1:
+cout<<endl<<"You have chosen 1 BHK apartment";
+cout<<endl<<"1 BHK apartments are available in : \n";
+cout<<endl<<"A. LOKHANDWALA";
+cout<<endl<<"B. BANDRA";
+cout<<endl<<"C. COLABA";
+cout<<endl<<"Enter the location of the apartment : ";
+cin>>location_apt;
+switch(location_apt)
+{
+case 'A':
+cout<<endl<<"APARTMENTS IN LOKHANDWALA";
+price_persqfeet=850;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"APARTMENTS IN BANDRA";
+price_persqfeet=110;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"APARTMENTS IN COLABA";
+price_persqfeet=140;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+case 2:
+cout<<endl<<"You have chosen 2 BHK apartment";
+cout<<endl<<"2 BHK apartments are available in : \n";
+cout<<endl<<"A. LOKHANDWALA";
+cout<<endl<<"B. BANDRA";
+cout<<endl<<"C. COLABA";
+cout<<endl<<"Enter the location of the apartment : ";
+cin>>location_apt;
+switch(location_apt)
+{
+case 'A':
+cout<<endl<<"APARTMENTS IN LOKHANDWALA";
+price_persqfeet=175;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"APARTMENTS IN BANDRA";
+price_persqfeet=370;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"APARTMENTS IN COLABA";
+price_persqfeet=500;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+case 3:
+cout<<endl<<"You have chosen 3 BHK apartment";
+cout<<endl<<"3 BHK apartments are available in : ";
+cout<<endl<<"A. LOKHANDWALA";
+cout<<endl<<"B. BANDRA";
+cout<<endl<<"C. COLABA";
+cout<<endl<<"Enter the location of the apartment : ";
+cin>>location_apt;
+switch(location_apt)
+{
+case 'A':
+cout<<endl<<"APARTMENTS IN LOKHANDWALA";
+price_persqfeet=350;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"APARTMENTS IN BANDRA";
+price_persqfeet=550;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"APARTMENTS IN COLABA";
+price_persqfeet=650;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+}
+}
+
+//Class declaration for commercial buildings
+class commercial_building
+{
+private:
+int type_building;
+char condition[25];
+int stories;
+char use[25];
+char first_name[25];
+char last_name[25];
+int contact_no;
+char email_add[25];
+float budget;
+public:
+void Get_Info();
+void Commercial_Building_Menu();
+void Enter_Choice_Display_Info();
+};
+//Function to enter details regarding commercial buildings
+void commercial_building::Get_Info()
+{
+cout<<"Enter your first name : ";
+gets(first_name);
+cout<<"Enter your last name : ";
+gets(last_name);
+cout<<"Enter your contact number : ";
+cin>>contact_no;
+cout<<"Enter your email address : ";
+gets(email_add);
+cout<<"Enter your budget : ";
+cin>>budget;
+cout<<"Enter the number of stories you want : ";
+cin>>stories;
+cout<<"Enter the condition of the commercial buliding you want  : ";
+gets(condition);
+}
+
+//Function to display menu about commercial buildings
+void commercial_building::Commercial_Building_Menu()
+{
+cout<<endl<<"******************COMMERCIAL BUILDINGS MENU********************";
+cout<<endl<<"1. Office";
+cout<<endl<<"2. Factory";
+cout<<endl<<"3. Shop";
+}
+
+//Function to display details regarding commercial buildings
+void commercial_building::Enter_Choice_Display_Info()
+{
+Commercial_Building_Menu();
+int type_cb;
+char location_cb;
+cout<<endl<<"Enter the type of commercial building you want : ";
+cin>>type_cb;
+switch(type_cb)
+{
+case 1:
+cout<<endl<<"You have chosen office";
+cout<<endl<<"Offices are located in : ";
+cout<<endl<<"A. Navi Mumbai";
+cout<<endl<<"B. Fort";
+cout<<endl<<"C. Nariman Point";
+cout<<endl<<"Enter the location of the commercial building : \n";
+cin>>location_cb;
+switch(location_cb)
+{
+case 'A':
+cout<<endl<<"OFFICE IN NAVI MUMBAI :";
+cout<<endl<<"Rencal Chemicals Ltd.";
+cout<<endl<<"Address : 24 Mahavir Centre, Sector 17, Vashi, Navi Mumbai - 400703";
+cout<<endl<<"Contact No. : 27893566";
+price_persqfeet=150;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"OFFICE IN FORT";
+cout<<endl<<"INCONNECT Media Services ";
+cout<<endl<<"Address : 155, Great Western Building, MCC Lane, Kala Ghoda, Fort, Mumbai - 400023";
+cout<<endl<<"Contact No. : 9967664664";
+price_persqfeet=400;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"OFFICE IN NARIMAN POINT";
+cout<<endl<<"Thomas Cook India LTD";
+cout<<endl<<"Address : 1st Floor, Chandremukhi Building, Behind Obreoi Hotel, Opposite INOX Cinema, Nariman Point, Mumbai - 400021";
+cout<<endl<<"Contact No. :  66092193";
+price_persqfeet=350;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+case 2:
+cout<<endl<<"You have chosen factory";
+cout<<endl<<"Factories are located in : \n";
+cout<<endl<<"A. Mahalaxmi";
+cout<<endl<<"B. Kurla";
+cout<<endl<<"C. Thane";
+cout<<endl<<"Enter the location of the factory : ";
+cin>>location_cb;
+switch(location_cb)
+{
+case 'A':
+cout<<endl<<"FACTORY IN MAHALAXMI :";
+cout<<endl<<"KC Ice Cube Factory";
+cout<<endl<<"Address : 2B/ 1, Ram Rahim Co Premises, Jacob Circle, Sat Rasta, Moosa Killedar Street, Mahalaxmi, Mumbai - 400011";
+cout<<endl<<"Contact No. : 27893566";
+price_persqfeet=140;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"FACTORY IN KURLA";
+cout<<endl<<"Welcome Footwear";
+cout<<endl<<"Address : Golden Plaza, Nehru Nagar, Near Station, Kurla East, Mumbai - 400024";
+cout<<endl<<"Contact No. : 66024585 ";
+price_persqfeet=200;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"FACTORY IN THANE";
+cout<<endl<<"Jayco Plastics";
+cout<<endl<<"Address : Neminath Indl Estate,No 4,Gala No 8/9, Navghar, Vasai East, Thane - 401204";
+cout<<endl<<"Contact No. :  9820120054";
+price_persqfeet=250;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+case 3:
+cout<<endl<<"You have chosen shop";
+cout<<endl<<"Shops are located in : ";
+cout<<endl<<"A. Colaba";
+cout<<endl<<"B. Khar";
+cout<<endl<<"C. Lower Parel";
+cout<<endl<<"Enter the location of the shop : \n";
+cin>>location_cb;
+switch(location_cb)
+{
+case 'A':
+cout<<endl<<"SHOP IN COLABA";
+cout<<endl<<"Fashion Street";
+cout<<endl<<"Address : MG Rd Colaba";
+cout<<endl<<"Contact No. : 25455467";
+price_persqfeet=600;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'B':
+cout<<endl<<"SHOP IN KHAR";
+cout<<endl<<"Musician/'s Mall";
+cout<<endl<<"Address :  2, A.B.D.E. Villa, 99 S.V. Road  Khar West, Mumbai - 400052";
+cout<<endl<<"Contact No. :  9819331830 ";
+price_persqfeet=750;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+case 'C':
+cout<<endl<<"SHOP IN LOWER PAREL";
+cout<<endl<<"Realtime IT Concepts Pvt. Ltd. - Canon Image Square";
+cout<<endl<<"Address : Unit No. 5, Grand Galleria, High Street Phoenix, Senapati Bapat Road, Lower Parel  Lower Parel, Mumbai - 400013";
+cout<<endl<<"Contact `No. : 9820122399";
+price_persqfeet=900;
+cout<<endl<<"Price per sq feet : "<<price_persqfeet;
+break;
+}
+break;
+}
+}
+land L1;
+apartments A1;
+bungalow B1;
+commercial_building C1;
+int main()
+{
+
+//Enter password
+int i=0,key=0,trys=1;
+char temp,a[7],b[7]={'1','2','3','4','5','6','7'};
+again:
+if(trys<=3)
+{
+cout<<"\n\nEnter the password : ";
+while(i<20)
+{
+temp=getch();
+if (temp==13)
+break;
+a[i]=temp;
+i++;
+cout<<"*";
+}
+for(i=0;i<7;i++)
+{
+if(a[i]!=b[i] || a[i]==NULL)
+key=1;
+}
+}
+else
+{
+cout<<"You tried maximum number of times";
+exit(0);
+}
+if(key==0)
+printf("\n\n\n\t\t\t\tYou entered the correct password");
+else
+{
+printf("\n\n\n\tYou have entered the wrong password. \nYou have tried %d out of 3 ",trys);
+trys++;
+goto again;
+}
+//clrscr();
+int property;
+cout<<endl<<"********************************************************************************";
+cout<<"\n\n";
+cout<<endl<<"=====================WELCOME TO SKYHIGH REAL ESTATE AGENCY======================";
+cout<<"\n\n";
+cout<<endl<<"********************************************************************************";
+//Property menu
+Menu:
+cout<<endl<<"PROPERTY MENU";
+cout<<endl<<"1. Land";
+cout<<endl<<"2. Apartment";
+cout<<endl<<"3. Bungalow";
+cout<<endl<<"4. Commercial Building";
+cout<<endl<<"Enter the type of property you want to buy(1-4) : ";
+cin>>property;
+switch(property)
+{
+case 1:
+cout<<endl<<"You have chosen land!!"<<endl;
+L1.Read_Details();
+L1.Enter_Choice_Display();
+break;
+case 2:
+cout<<endl<<"You have chosen apartment!!"<<endl;
+A1.Enter_Details();
+A1.Enter_Choice_Display();
+break;
+case 3:
+cout<<endl<<"You have chosen bungalow!!"<<endl;
+B1.Get_Details();
+B1.BHK();
+break;
+case 4:
+cout<<endl<<"You have chosen commercial building!!"<<endl;
+C1.Get_Info();
+C1.Enter_Choice_Display_Info();
+break;
+}
+cout<<endl<<"Do you want to buy the property(Y/N)?";
+cin>>option;
+if(option=='y'||option=='Y')
+cout<<endl<<"You have decided to buy the property!!";
+else
+{
+cout<<endl<<"You have cancelled your booking!!";
+goto Menu;
+}
+char chh;
+char ans;
+char ch;
+int x;
+int rn;
+long pos;
+char found='f',confirm='n';
+if(amount>budget)
+{
+cout<<endl<<"Amount payable is greater than your budget!!!";
+cout<<endl<<"Do you still want to buy the property(Y/N)";
+cin>>ans;
+if(ans=='y'||ans=='Y')
+cout<<endl<<"You have decided to buy the property!!";
+else
+cout<<endl<<"You have cancelled your booking!!";
+}
+else if(amount<=budget)
+{
+cout<<endl<<"The amount payable is less than your budget!!!";
+cout<<endl<<"Enter your confirmation : ";
+cin>>ans;
+if(ans=='y'||ans=='Y')
+cout<<endl<<"You have decided to buy the property!!";
+else
+cout<<endl<<"You have cancelled your booking!!";
+}
+char ans1='y';
+fstream fo;
+fstream fin;
+fstream fio;
+fstream file;
+fstream fio1;
+//File handling programs
+do
+{
+cout<<endl<<"What would you like to do next?";
+cout<<endl<<"1. Add more records";
+cout<<endl<<"2. View the records";
+cout<<endl<<"3. Search for a record";
+cout<<endl<<"4. Delete a record";
+cout<<endl<<"5. Modify a record";
+cout<<endl<<"6. Exit";
+cout<<endl<<"Enter your choice(1-7) : ";
+cin>>x;
+switch(x)
+{
+//Add records
+case 1:
+fo.open("property.txt",ios::app);
+while(ans1=='y'||ans1=='Y')
+{
+P1.Get_Info();
+P1.Calculate_Price();
+fo.write((char*)&P1,sizeof(P1));
+cout<<endl<<"Record added to the file!!";
+cout<<endl<<"Your bill is as follows : \n";
+cout<<endl<<"***************BILL***************";
+cout<<endl<<"Area of property : "<<P1.area;
+cout<<endl<<"Amount : "<<P1.amount1;
+cout<<endl<<"Want to enter more records(Y/N)?";
+cin>>ans1;
+}
+fo.close();
+break;
+//View the records of the file
+case 2:
+fin.open("property.txt",ios::in);
+cout<<endl<<"Now the file contains \n";
+while(!fin.eof())
+{
+fin.read((char*)&P1,sizeof(P1));
+if(fin.eof()) break;
+P1.Put_Info();
+}
+
+fin.close();
+break;
+
+//Search for a record
+case 3:
+do
+{
+ifstream fi("property.txt",ios::in);
+cout<<"Enter transaction number of the record to be searched for : ";
+cin>>rn;
+while(!fi.eof())
+{
+fi.read((char*)&P1,sizeof(P1));
+if(P1.Get_Rec_No()==rn)
+{
+P1.Put_Info();
+found='y';
+break;
+}
+}
+if(found=='n')
+cout<<endl<<"Record not found in the file!!"<<endl;
+fi.close();
+cout<<endl<<"Do you want to search for more records(Y/N)?";
+cin>>ch;
+}while(ch=='y'||ch=='Y');
+break;
+
+//Delete a record
+case 4:
+fio.open("property.txt",ios::in);
+file.open("temp.txt",ios::out);
+int rno;
+cout<<endl<<"Enter the transaction number of the record to be deleted : ";
+cin>>rno;
+while(!fio.eof())
+{
+fio.read((char *)&P1,sizeof(P1));
+if(P1.Get_Rec_No()==rno)
+{
+P1.Put_Info();
+found='t';
+cout<<endl<<"Are you sure, you want to delete this record(Y/N)?";
+cin>>confirm;
+if(confirm=='n')
+file.write((char*)&P1,sizeof(P1));
+}
+else
+file.write((char*)&P1,sizeof(P1));
+}
+if(found=='f')
+cout<<endl<<"Record not found!!";
+fio.close();
+file.close();
+remove("property.txt");
+rename("temp.txt","property.txt");
+fio.open("property.txt",ios::in);
+cout<<endl<<"Now the file contains \n";
+while(!fio.eof())
+{
+fio.read((char*)&prop,sizeof(prop));
+if(fio.eof()) break;
+prop.Put_Info();
+}
+fio.close();
+break;
+
+//Modify a record
+case 5:
+fio.open("property.txt",ios::in|ios::out|ios::binary);
+fio.seekg(0) ;
+cout<<endl<<"Enter the transaction number of the record to be modified : ";
+cin>>rno;
+while(!fio.eof())
+{
+pos=fio.tellg();
+fio.read((char*)&P1,sizeof(P1));
+if(P1.Get_Rec_No()==rno)
+{
+P1.Modify();
+fio.seekg(pos);
+fio.write((char*)&P1,sizeof(P1));
+found='t';
+break;
+}
+}
+if(found=='f')
+cout<<endl<<"Record not found!!\n";
+fio.seekg(0);
+cout<<endl<<"Now the file contains\n";
+while(!fio.eof())
+{
+fio.read((char*)&prop,sizeof(prop));
+prop.Put_Info();
+}
+fio.close();
+break;
+case 6:
+break;
+default:
+cout<<endl<<"Wrong choice!! Enter a valid one";
+break;
+}
+cout<<endl<<"Do you want to continue(Y/N)?";
+cin>>chh;
+}while(chh=='y'||chh=='Y');
+goto Menu;
+return 0;
+}
+
